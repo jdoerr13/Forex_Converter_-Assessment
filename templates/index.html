@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Currency Converter</title>
+</head>
+<body>
+    <h1>Forex Converter</h1>
+    <form action="/convert" method="post">
+        <label for="base_currency">From Currency:</label>
+        <select id="base_currency" name="base_currency" required>
+            {% for currency_code in currency_options %}
+            <option value="{{ currency_code }}">{{ currency_code }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="target_currency">To Currency:</label>
+        <select id="target_currency" name="target_currency" required>
+            {% for currency_code in currency_options %}
+            <option value="{{ currency_code }}">{{ currency_code }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" step="0.01" required>
+        <br>
+        <input type="submit" value="Convert">
+    </form>
+
+    {% if error_msg %}
+    <div style="color: red;">
+        Error: {{ error_msg }}
+    </div>
+    {% endif %}
+
+    {% if result is not none %}
+    <div id="result">
+        Result: {{ converted_result }}
+    </div>
+    {% endif %}
+</body>
+</html>
